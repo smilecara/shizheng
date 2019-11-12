@@ -9,7 +9,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 
 @Controller
-public class DemoController {
+@RequestMapping(value = "/contract")
+public class ContractController {
 
 
     @RequestMapping(value = "/list-parent", method = GET)
@@ -56,4 +57,12 @@ public class DemoController {
                 "{\"project_name\": \"市二路\",\"project_type\": \"技术\",\"part_a\":\"甲方1\",\"part_b\":\"乙方1\",\"cost\":200,\"start_date\":\"2019-11-11\",\"end_date\":\"2019-11-11\",\"created_person\":\"张三\",\"checked_person\":\"李四\",\"sign_date\":\"2019-11-11\"}, " +
                 "{\"project_name\": \"市三路\",\"project_type\": \"技术\",\"part_a\":\"甲方1\",\"part_b\":\"乙方1\",\"cost\":200,\"start_date\":\"2019-11-11\",\"end_date\":\"2019-11-11\",\"created_person\":\"张三\",\"checked_person\":\"李四\",\"sign_date\":\"2019-11-11\"}   ]}";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/data", method = GET)
+    public String data() {
+
+        return null;
+    }
+
 }

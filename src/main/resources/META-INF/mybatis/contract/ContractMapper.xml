@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rua.demo.mapper.contract.ContractMapper">
+    <resultMap type="com.rua.demo.entity.contract.ContractDTO" id="contractMap">
+        <result column="contract_id" property="contractUid"/>
+        <result column="project_name" property="projectName"/>
+        <result column="tech_budget" property="techBudget"/>
+        <result column="settle_budget" property="settleBudget"/>
+        <result column="extra_budget" property="extraBudget"/>
+        <result column="total_budget" property="totalBudget"/>
+        <result column="description" property="description"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="archive" property="archive"/>
+    </resultMap>
+
+    <insert id="createContract" parameterType="com.rua.demo.entity.contract.ContractDTO">
+        <selectKey keyProperty="userUid" order="BEFORE" resultType="string">
+            SELECT tnt_uuid_short() AS contractUid
+        </selectKey>
+        INSERT INTO ace_biz_contract
+            (contract_uid, project_name, tech_budget, settle_budget,
+            extra_budget, total_budget, description, start_date, end_date, archive)
+        VALUES
+            (#{contractUid}, #{projectName, #{techBudget}, #{settleBudget},
+            #{extraBudget}, #{totalBudget}, #{description}, #{startDate}, #{endDate}, 1)
+    </insert>
+
+    <update id="updateContract">
+        UPDATE ace_biz_contract
+        SET
+          project_name = #{projectName},
+          tech_budget = #{techBudget},
+          settle_budget = #{settleBudget},
+          extra_budget = #{extraBudget},
+          total_budget = #{totalBudget},
+          description = #{description},
+          start_date = #{startDate},
+          end_date = #{endDate}
+    </update>
+
+    <select id="listContracts" resultType="com.rua.demo.entity.contract.ContractDTO">
+        SELECT contract_uid, project_name, tech_budget, settle_budget,
+            extra_budget, total_budget, description, start_date, end_date, archive
+        FROM ace_biz_contract
+        WHERE project_name = #{projectName}
+        AND archive = 1
+    </select>
+
+    <select id="getContractByContractUid" resultType="com.rua.demo.entity.contract.ContractDTO">
+        SELECT contract_uid, project_name, tech_budget, settle_budget,
+            extra_budget, total_budget, description, start_date, end_date, archive
+        FROM ace_biz_contract
+        WHERE contract_uid = #{contractUid}
+        AND archive = 1
+    </select>
+
+
+</mapper>
