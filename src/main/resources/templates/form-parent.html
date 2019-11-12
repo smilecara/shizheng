@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>市政项目</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">XXX 管理系统</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    系统管理员
+                </a>
+            </li>
+            <li class="layui-nav-item"><a href="">退出</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">一级菜单</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">二级菜单1</a></dd>
+                        <dd><a href="javascript:;">二级菜单2</a></dd>
+                        <dd><a href="javascript:;">二级菜单3</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">一级菜单</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">二级菜单1</a></dd>
+                        <dd><a href="javascript:;">二级菜单2</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <div class="layui-card">
+                    <div class="layui-card-header">
+                        合同
+                    </div>
+                    <div class="layui-card-body">
+                        <form class="layui-form" action="" style="width: 80%">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">项目名称</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="project_name" autocomplete="off" placeholder="请输入项目名称" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">开始日期</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="start_date" id="start_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">结束日期</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="end_date" id="end_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+
+                            <div class="layui-col-md12" style="padding-bottom: 10px">
+                                <label class="layui-form-label">分项预算</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="tech_budget" lay-verify="tech_budget" autocomplete="off" placeholder="技术预算" class="layui-input">
+                                </div>
+                                <label class="layui-label-inline">+</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="settle_budget" lay-verify="settle_budget" autocomplete="off" placeholder="安置预算" class="layui-input">
+                                </div>
+                                <label class="layui-label-inline">+</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="extra_budget" lay-verify="extra_budget" autocomplete="off" placeholder="其他预算" class="layui-input">
+                                </div>
+                                <label class="layui-label-inline">=</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="total_budget" readonly lay-verify="total_budget" autocomplete="off" placeholder="总预算" class="layui-input layui-input-disable">
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="layui-form-item layui-form-text">
+                                <label class="layui-form-label">项目描述</label>
+                                <div class="layui-input-block">
+                                    <textarea placeholder="请项目描述" class="layui-textarea"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="layui-form-item" style="text-align: center;">
+                                <button class="layui-btn" lay-submit="" lay-filter="demo1" >提交</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+    <div class="layui-form-item">
+        <button class="layui-btn" lay-submit="" lay-filter="demo1">跳转式提交</button>
+    </div>
+</form>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+        //日期
+        laydate.render({
+            elem: '#start_date'
+        });
+        laydate.render({
+            elem: '#end_date'
+        });
+
+
+    });
+</script>
+</body>
+</html>
