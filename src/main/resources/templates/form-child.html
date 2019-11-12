@@ -25,9 +25,9 @@
         </ul>
     </div>
 
-    <div class="layui-side layui-bg-black">
+    <!--<div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            &lt;!&ndash; 左侧导航区域（可配合layui已有的垂直导航） &ndash;&gt;
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">一级菜单</a>
@@ -46,96 +46,94 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div>-->
 
     <div class="layui-body">
-        <div class="layui-fluid">
-            <div class="layui-row">
-                <div class="layui-card">
-                    <div class="layui-card-header">
-                        合同
-                    </div>
-                    <div class="layui-card-body">
-                        <form class="layui-form" action="" style="width: 80%">
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">项目名称</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="project_name" autocomplete="off" placeholder="请输入项目名称" class="layui-input">
-                                </div>
+        <div class="layui-row">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    合同
+                </div>
+                <div class="layui-card-body">
+                    <form class="layui-form" action="" style="width: 80%">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">项目名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="project_name" autocomplete="off" placeholder="请输入项目名称" class="layui-input">
                             </div>
+                        </div>
 
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">项目类别</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="project_type" autocomplete="off" placeholder="请输入项目类别" class="layui-input">
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">项目类别</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="project_type" autocomplete="off" placeholder="请输入项目类别" class="layui-input">
                             </div>
+                        </div>
 
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">甲方</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="part_a" autocomplete="off" class="layui-input">
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">甲方</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="part_a" autocomplete="off" class="layui-input">
                             </div>
+                        </div>
 
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">乙方</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="part_b" autocomplete="off" class="layui-input">
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">乙方</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="part_b" autocomplete="off" class="layui-input">
                             </div>
+                        </div>
 
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">开始日期</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="start_date" id="start_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">开始日期</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="start_date" id="start_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                             </div>
+                        </div>
 
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">结束日期</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="end_date" id="end_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">结束日期</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="end_date" id="end_date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
                             </div>
+                        </div>
 
 
-                            <div class="layui-form-item">
-                                <label class="layui-form-label">金额</label>
-                                <div class="layui-input-block">
-                                    <input type="text" name="cost" placeholder="请输入金额" autocomplete="off" class="layui-input">
-                                </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">金额</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="cost" placeholder="请输入金额" autocomplete="off" class="layui-input">
                             </div>
+                        </div>
 
-                            <div class="layui-form-item layui-form-text">
-                                <label class="layui-form-label">项目描述</label>
-                                <div class="layui-input-block">
-                                    <textarea placeholder="请输入项目描述" class="layui-textarea"></textarea>
-                                </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">项目描述</label>
+                            <div class="layui-input-block">
+                                <textarea placeholder="请输入项目描述" class="layui-textarea"></textarea>
                             </div>
+                        </div>
 
-                            <div class="layui-col-md12" style="margin: 10px">
-                                <label class="layui-form-label"></label>
-                                <label class="layui-form-inline">拟定人</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="created_person" lay-verify="created_person" autocomplete="off" placeholder="拟定人" class="layui-input">
-                                </div>
-                                <label class="layui-form-inline">核对人</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="checked_person" lay-verify="checked_person" autocomplete="off" placeholder="核对人" class="layui-input">
-                                </div>
-                                <label class="layui-form-inline">签订日期</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="sign_date" lay-verify="sign_date" autocomplete="off" placeholder="签订日期" class="layui-input">
-                                </div>
+                        <div class="layui-col-md12" style="margin: 10px">
+                            <label class="layui-form-label"></label>
+                            <label class="layui-form-inline">拟定人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="created_person" lay-verify="created_person" autocomplete="off" placeholder="拟定人" class="layui-input">
                             </div>
-
-                            <div class="layui-form-item" style="text-align: center;">
-                                <button class="layui-btn" lay-submit="" lay-filter="demo1" >提交</button>
+                            <label class="layui-form-inline">核对人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="checked_person" lay-verify="checked_person" autocomplete="off" placeholder="核对人" class="layui-input">
                             </div>
+                            <label class="layui-form-inline">签订日期</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sign_date" lay-verify="sign_date" autocomplete="off" placeholder="签订日期" class="layui-input">
+                            </div>
+                        </div>
 
-                        </form>
-                    </div>
+                        <div class="layui-form-item" style="text-align: center;">
+                            <button class="layui-btn" lay-submit="" lay-filter="demo1" >提交</button>
+                        </div>
+
+                    </form>
                 </div>
             </div>
         </div>
