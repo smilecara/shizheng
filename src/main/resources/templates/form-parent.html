@@ -50,7 +50,12 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">项目名称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="project_name" autocomplete="off" placeholder="请输入项目名称" class="layui-input">
+                                <select name="project_name" lay-filter="aihao">
+                                    <option value=""></option>
+                                    <option value="0" selected="">市一路</option>
+                                    <option value="1" >市二路</option>
+                                    <option value="2">市三路</option>
+                                </select>
                             </div>
                         </div>
 
