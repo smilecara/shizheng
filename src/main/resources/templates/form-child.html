@@ -5,7 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>市政项目</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
+
+    <style type="text/css">
+        .expand_title {
+            width: 150px
+        }
+
+        .layui-inline .layui-input-inline {
+            width: 300px
+        }
+
+        .layui-inline .layui-form-label {
+            width: 90px
+        }
+
+    </style>
 </head>
+
+
+
+
 <body class="layui-layout-body">
 
 <div class="layui-layout layui-layout-admin">
@@ -42,7 +61,7 @@
         <div class="layui-row">
             <div class="layui-card">
                 <div class="layui-card-header">
-                    合同
+                    杭州市城市建设前期办公室合同、协议会签单
                 </div>
                 <div class="layui-card-body">
                     <form class="layui-form" action="" style="width: 80%">
@@ -52,6 +71,44 @@
                                 <input type="text" name="project_name" autocomplete="off" placeholder="请输入项目名称" class="layui-input">
                             </div>
                         </div>-->
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">领导签发</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="leader_sign" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label" style="width: 100px;">综合处核稿意见</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="review_advice" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">领导会签</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="leader_countersign" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label expand_title">会签部门意见</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="countersign_advice" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: 90px;padding-right: 5px">合同协议编号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="contract_code" class="layui-input">
+                            </div>
+                        </div>
+
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">项目名称</label>
