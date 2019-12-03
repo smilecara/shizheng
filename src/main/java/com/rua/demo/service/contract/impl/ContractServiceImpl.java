@@ -3,11 +3,17 @@ package com.rua.demo.service.contract.impl;
 import com.github.pagehelper.PageInfo;
 import com.rua.demo.entity.contract.ContractDTO;
 import com.rua.demo.entity.contract.ContractRequestDTO;
+import com.rua.demo.mapper.contract.ContractMapper;
 import com.rua.demo.service.contract.ContractService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ContractServiceImpl implements ContractService {
+
+    @Autowired
+    private ContractMapper contractMapper;
+
     @Override
     public PageInfo<ContractDTO> listContracts(ContractRequestDTO contractRequestDTO) {
         return null;
@@ -15,7 +21,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public int createContract(ContractDTO contractDTO) {
-        return 0;
+        return contractMapper.createContract(contractDTO);
     }
 
     @Override

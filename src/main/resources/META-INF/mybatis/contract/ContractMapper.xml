@@ -8,22 +8,22 @@
         <result column="settle_budget" property="settleBudget"/>
         <result column="extra_budget" property="extraBudget"/>
         <result column="total_budget" property="totalBudget"/>
-        <result column="description" property="description"/>
+        <result column="organizer_advice" property="organizerAdvice"/>
         <result column="start_date" property="startDate"/>
         <result column="end_date" property="endDate"/>
         <result column="archive" property="archive"/>
     </resultMap>
 
     <insert id="createContract" parameterType="com.rua.demo.entity.contract.ContractDTO">
-        <selectKey keyProperty="userUid" order="BEFORE" resultType="string">
+        <selectKey keyProperty="contractUid" order="BEFORE" resultType="string">
             SELECT tnt_uuid_short() AS contractUid
         </selectKey>
         INSERT INTO ace_biz_contract
             (contract_uid, project_name, tech_budget, settle_budget,
-            extra_budget, total_budget, description, start_date, end_date, archive)
+            extra_budget, total_budget, organizer_advice, start_date, end_date, archive)
         VALUES
-            (#{contractUid}, #{projectName, #{techBudget}, #{settleBudget},
-            #{extraBudget}, #{totalBudget}, #{description}, #{startDate}, #{endDate}, 1)
+            (#{contractUid}, #{projectName}, #{techBudget}, #{settleBudget},
+            #{extraBudget}, #{totalBudget}, #{organizerAdvice}, #{startDate}, #{endDate}, 1)
     </insert>
 
     <update id="updateContract">

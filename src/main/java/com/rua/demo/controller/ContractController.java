@@ -1,16 +1,45 @@
 package com.rua.demo.controller;
 
+import com.rua.demo.common.constant.BaseCode;
+import com.rua.demo.common.exception.BaseException;
+import com.rua.demo.common.util.FastJsonUtils;
+import com.rua.demo.common.util.ResultBuilderUtils;
+import com.rua.demo.entity.contract.ContractDTO;
+import com.rua.demo.service.contract.ContractService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 @Controller
 @RequestMapping(value = "/contract")
 public class ContractController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ContractController.class);
+
+    @Autowired
+    private ContractService contractService;
+
+    @RequestMapping(value = "/createContract", method = POST)
+    @ResponseBody
+    public String createContract(@RequestBody String payload) {
+        logger.info("ContractController #createContract payload: {}", payload);
+        ContractDTO contractDTO = FastJsonUtils.toBean(payload, ContractDTO.class);
+        int result = contractService.createContract(contractDTO);
+        if (result != 1) {
+            throw new BaseException(BaseCode.UNKNOWN, "创建合同出错");
+        }
+
+        return ResultBuilderUtils.buildSuccess(result);
+    }
 
 
     @RequestMapping(value = "/list-parent", method = GET)

@@ -8,7 +8,7 @@
 </head>
 <body class="layui-layout-body">
 
-<div class="layui-layout layui-layout-admin">
+    <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
         <div class="layui-logo">市政管理系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
@@ -39,22 +39,22 @@
         </div>
     </div>
 
-    <div class="layui-body">
+    <div class="layui-body" style="padding: 0 150px">
         <div class="layui-row">
             <div class="layui-card">
-                <div class="layui-card-header">
+                <div class="layui-card-header" style="text-align: center; font-size: 20px;">
                     合同
                 </div>
                 <div class="layui-card-body">
-                    <form class="layui-form" action="" style="width: 80%">
+                    <form class="layui-form" action="">
                         <div class="layui-form-item">
                             <label class="layui-form-label">项目名称</label>
                             <div class="layui-input-block">
-                                <select name="project_name" lay-filter="aihao">
+                                <select name="project_name">
                                     <option value=""></option>
-                                    <option value="0" selected="">市一路</option>
-                                    <option value="1" >市二路</option>
-                                    <option value="2">市三路</option>
+                                    <option value="road_one" selected="">市一路</option>
+                                    <option value="road_two" >市二路</option>
+                                    <option value="road_three">市三路</option>
                                 </select>
                             </div>
                         </div>
@@ -75,19 +75,19 @@
 
                         <div class="layui-col-md12" style="padding-bottom: 10px">
                             <label class="layui-form-label">分项预算</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-inline" style="width: 180px;">
                                 <input type="text" name="tech_budget" lay-verify="tech_budget" autocomplete="off" placeholder="技术预算" class="layui-input">
                             </div>
                             <label class="layui-label-inline">+</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-inline" style="width: 180px;">
                                 <input type="text" name="settle_budget" lay-verify="settle_budget" autocomplete="off" placeholder="安置预算" class="layui-input">
                             </div>
                             <label class="layui-label-inline">+</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-inline" style="width: 180px;">
                                 <input type="text" name="extra_budget" lay-verify="extra_budget" autocomplete="off" placeholder="其他预算" class="layui-input">
                             </div>
                             <label class="layui-label-inline">=</label>
-                            <div class="layui-input-inline">
+                            <div class="layui-input-inline" style="width: 180px;">
                                 <input type="text" name="total_budget" readonly lay-verify="total_budget" autocomplete="off" placeholder="总预算" class="layui-input layui-input-disable">
                             </div>
                         </div>
@@ -96,14 +96,14 @@
 
 
                         <div class="layui-form-item layui-form-text">
-                            <label class="layui-form-label">项目描述</label>
+                            <label class="layui-form-label">主办处意见</label>
                             <div class="layui-input-block">
-                                <textarea placeholder="请项目描述" class="layui-textarea"></textarea>
+                                <textarea name="organizer_advice" placeholder="主办处意见" class="layui-textarea"></textarea>
                             </div>
                         </div>
 
                         <div class="layui-form-item" style="text-align: center;">
-                            <button class="layui-btn" lay-submit="" lay-filter="demo1" >提交</button>
+                            <button class="layui-btn" lay-submit lay-filter="parent-form-submit" >提交</button>
                         </div>
 
                     </form>
@@ -114,39 +114,63 @@
     </div>
 
 </div>
+</body>
 
-
-
-    <div class="layui-form-item">
-        <button class="layui-btn" lay-submit="" lay-filter="demo1">跳转式提交</button>
-    </div>
-</form>
 <script src="/layui/layui.js"></script>
-<script>
-    layui.use(['form', 'layedit', 'laydate'], function(){
-        var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate;
+<script src="/scripts/es6-promise.min.js"></script>
+<script type="text/javascript">
+    layui.config({
+        lmfView: '/scripts/lib/lmfView'
+    });
+
+    layui.use(['form', 'laydate'], function(){
+        var form = layui.form;
+        var layer = layui.layer;
+        var laydate = layui.laydate;
+        var $ = layui.$;
 
         //监听提交
-        form.on('submit(demo1)', function(data){
+        form.on('submit(parent-form-submit)', function(data){
             layer.alert(JSON.stringify(data.field), {
                 title: '最终的提交信息'
-            })
+            });
+
+            $.ajax({
+                type: "post",
+                url: "/contract/createContract",
+                dataType: "json",
+                contentType: "application/json",
+                async: false,
+                data: JSON.stringify(data.field)
+            }).then(function (res) {
+                if (res.code != 200) {
+                    layer.Notify.error(res.error_msg || '新增合同失败!');
+                    return false;
+                }
+
+                layer.Notify.success('新增合同成功!');
+            });
+
+
             return false;
         });
 
         //日期
         laydate.render({
-            elem: '#start_date'
+            elem: '#start_date',
+            format: 'yyyy-MM-dd',
+            type: 'date',
+            maxElem: '#end_date'
         });
+
         laydate.render({
-            elem: '#end_date'
+            elem: '#end_date',
+            format: 'yyyy-MM-dd',
+            type: 'date',
+            minElem: '#start_date'
         });
 
 
     });
 </script>
-</body>
 </html>

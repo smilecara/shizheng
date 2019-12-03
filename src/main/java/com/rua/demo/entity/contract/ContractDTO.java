@@ -23,8 +23,8 @@ public class ContractDTO {
     private BigDecimal extraBudget;
     @JSONField(name = "total_budget")
     private BigDecimal totalBudget;
-    @JSONField(name = "description")
-    private String description;
+    @JSONField(name = "organizer_advice")
+    private String organizerAdvice;
     @JSONField(name = "start_date", format = "yyyy-MM-dd")
     private Date startDate;
     @JSONField(name = "end_date", format = "yyyy-MM-dd")
