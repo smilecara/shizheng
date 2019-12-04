@@ -1,10 +1,14 @@
 package com.rua.demo.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import com.rua.demo.common.constant.BaseCode;
 import com.rua.demo.common.exception.BaseException;
 import com.rua.demo.common.util.FastJsonUtils;
 import com.rua.demo.common.util.ResultBuilderUtils;
 import com.rua.demo.entity.contract.ContractDTO;
+import com.rua.demo.entity.contract.ContractRequestDTO;
 import com.rua.demo.entity.contract.SubContractDTO;
 import com.rua.demo.service.contract.ContractService;
 import org.slf4j.Logger;
@@ -40,6 +44,35 @@ public class ContractController {
         }
 
         return ResultBuilderUtils.buildSuccess(result);
+    }
+
+    @RequestMapping(value = "/listContract", method = POST)
+    @ResponseBody
+    public String listContract(@RequestBody String payload) {
+        logger.info("ContractController #listContract payload: {}", payload);
+        ContractRequestDTO contractRequestDTO = FastJsonUtils.toBean(payload, ContractRequestDTO.class);
+        PageInfo<ContractDTO> listContracts = contractService.listContracts(contractRequestDTO);
+
+        return ResultBuilderUtils.buildSuccess(listContracts);
+    }
+
+    @RequestMapping(value = "/updateContract", method = POST)
+    @ResponseBody
+    public String updateContract(@RequestBody String payload) {
+        logger.info("ContractController #updateContract payload: {}", payload);
+        ContractDTO contractDTO = FastJsonUtils.toBean(payload, ContractDTO.class);
+        contractService.updateContract(contractDTO);
+        return ResultBuilderUtils.buildSuccess(contractDTO.getContractUid());
+    }
+
+    @RequestMapping(value = "/getContractByContractUid", method = POST)
+    @ResponseBody
+    public String getContractByContractUid(@RequestBody String payload) {
+        logger.info("ContractController #getContractByContractUid payload: {}", payload);
+        JSONObject jsonObject = JSONObject.parseObject(payload);
+        String contractUid = jsonObject.getString("contract_uid");
+        ContractDTO contract = contractService.getContractByContractUid(contractUid);
+        return ResultBuilderUtils.buildSuccess(contract);
     }
 
 

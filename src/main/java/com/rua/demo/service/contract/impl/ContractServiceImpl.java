@@ -1,5 +1,6 @@
 package com.rua.demo.service.contract.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.rua.demo.entity.contract.ContractDTO;
 import com.rua.demo.entity.contract.ContractRequestDTO;
@@ -9,6 +10,8 @@ import com.rua.demo.mapper.contract.SubContractMapper;
 import com.rua.demo.service.contract.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class ContractServiceImpl implements ContractService {
@@ -21,7 +24,10 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public PageInfo<ContractDTO> listContracts(ContractRequestDTO contractRequestDTO) {
-        return null;
+        PageHelper.startPage(contractRequestDTO.getPageNum(), contractRequestDTO.getPageSize());
+        List<ContractDTO> contractDTOS = contractMapper.listContracts(contractRequestDTO);
+        PageInfo<ContractDTO> contractDTOPageInfo = new PageInfo<>(contractDTOS);
+        return contractDTOPageInfo;
     }
 
     @Override
@@ -31,12 +37,12 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public int updateContract(ContractDTO contractDTO) {
-        return 0;
+        return contractMapper.updateContract(contractDTO);
     }
 
     @Override
     public ContractDTO getContractByContractUid(String contractUid) {
-        return null;
+        return contractMapper.getContractByContractUid(contractUid);
     }
 
     @Override

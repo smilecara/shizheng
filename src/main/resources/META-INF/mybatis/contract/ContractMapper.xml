@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.rua.demo.mapper.contract.ContractMapper">
     <resultMap type="com.rua.demo.entity.contract.ContractDTO" id="contractMap">
-        <result column="contract_id" property="contractUid"/>
+        <result column="contract_uid" property="contractUid"/>
         <result column="project_name" property="projectName"/>
         <result column="tech_budget" property="techBudget"/>
         <result column="settle_budget" property="settleBudget"/>
@@ -34,22 +34,28 @@
           settle_budget = #{settleBudget},
           extra_budget = #{extraBudget},
           total_budget = #{totalBudget},
-          description = #{description},
+          organizer_advice = #{organizerAdvice},
           start_date = #{startDate},
           end_date = #{endDate}
+        WHERE
+          contract_uid = #{contractUid}
+        AND archive = 1
     </update>
 
-    <select id="listContracts" resultType="com.rua.demo.entity.contract.ContractDTO">
+    <select id="listContracts" resultMap="contractMap">
         SELECT contract_uid, project_name, tech_budget, settle_budget,
-            extra_budget, total_budget, description, start_date, end_date, archive
+            extra_budget, total_budget, organizer_advice, start_date, end_date, archive
         FROM ace_biz_contract
         WHERE project_name = #{projectName}
         AND archive = 1
+        <if test="sortKey != null and sortOrder != null">
+            ORDER BY #{sortKey} #{sortOrder}
+        </if>
     </select>
 
-    <select id="getContractByContractUid" resultType="com.rua.demo.entity.contract.ContractDTO">
+    <select id="getContractByContractUid" resultMap="contractMap">
         SELECT contract_uid, project_name, tech_budget, settle_budget,
-            extra_budget, total_budget, description, start_date, end_date, archive
+            extra_budget, total_budget, organizer_advice, start_date, end_date, archive
         FROM ace_biz_contract
         WHERE contract_uid = #{contractUid}
         AND archive = 1

@@ -7,8 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PageableRequestDTO {
     
-    @JSONField(name = "page_no")
-    private Integer pageNo;
+    @JSONField(name = "page_num")
+    private Integer pageNum;
     
     @JSONField(name = "page_size")
     private Integer pageSize;
@@ -20,7 +20,7 @@ public class PageableRequestDTO {
     private String sortOrder;
     
     public boolean isPageable(){
-        return !(null == pageNo || null == pageSize);
+        return !(null == pageNum || null == pageSize);
     }
     
     public boolean isSortable(){
@@ -31,15 +31,15 @@ public class PageableRequestDTO {
         if(!isPageable()){
             return 0;
         }
-        return (pageNo -1) * pageSize;
+        return (pageNum -1) * pageSize;
     }
 
-    public Integer getPageNo() {
-        return null == pageNo ? null : (pageNo > 0 ? pageNo : 1);
+    public Integer getPageNum() {
+        return null == pageNum ? null : (pageNum > 0 ? pageNum : 1);
     }
 
-    public void setPageNo(Integer pageNo) {
-        this.pageNo = pageNo;
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
     }
 
     public Integer getPageSize() {
@@ -73,8 +73,8 @@ public class PageableRequestDTO {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("PageableRequestDTO [pageNo=");
-        builder.append(pageNo);
+        builder.append("PageableRequestDTO [pageNum=");
+        builder.append(pageNum);
         builder.append(", pageSize=");
         builder.append(pageSize);
         builder.append(", sortKey=");
