@@ -17,6 +17,8 @@ public class SubContractDTO {
     private String parentContractUid;
     @JSONField(name = "project_name")
     private String projectName;
+    @JSONField(name = "contract_code")
+    private String contractCode;
     @JSONField(name = "project_type")
     private String projectType;
     @JSONField(name = "part_a")
@@ -29,14 +31,22 @@ public class SubContractDTO {
     private Date endDate;
     @JSONField(name = "cost")
     private BigDecimal cost;
-    @JSONField(name = "description")
-    private String description;
+    @JSONField(name = "organizer_advice")
+    private String organizerAdvice;
     @JSONField(name = "created_person")
     private String createdPerson;
     @JSONField(name = "checked_person")
     private String checkedPerson;
     @JSONField(name = "sign_date")
     private Date signDate;
+    @JSONField(name = "leader_sign")
+    private String leaderSign;
+    @JSONField(name = "leader_countersign")
+    private String leaderCountersign;
+    @JSONField(name = "synthesize_advice")
+    private String synthesizeAdvice;
+    @JSONField(name = "countersign_advice")
+    private String countersignAdvice;
     @JSONField(name = "archive")
     private Integer archive;
 

@@ -82,7 +82,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label" style="width: 100px;">综合处核稿意见</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="review_advice" class="layui-input">
+                                    <input type="text" name="synthesize_advice" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -113,11 +113,11 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">项目名称</label>
                             <div class="layui-input-block">
-                                <select name="project_name" lay-filter="aihao">
+                                <select name="project_name" lay-filter="select_project_drop_down">
                                     <option value=""></option>
-                                    <option value="0" selected="">市一路</option>
-                                    <option value="1" >市二路</option>
-                                    <option value="2">市三路</option>
+                                    <option value="road_one" selected="">市一路</option>
+                                    <option value="road_two" >市二路</option>
+                                    <option value="road_three">市三路</option>
                                 </select>
                             </div>
                         </div>
@@ -133,9 +133,9 @@
                             <div class="layui-input-block">
                                 <select name="project_type" lay-filter="aihao">
                                     <option value=""></option>
-                                    <option value="0" selected="">技术</option>
-                                    <option value="1" >安置</option>
-                                    <option value="2">其他</option>
+                                    <option value="tech" selected="">技术</option>
+                                    <option value="settle" >安置</option>
+                                    <option value="extra">其他</option>
                                 </select>
                             </div>
                         </div>
@@ -179,7 +179,7 @@
                         <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">主办处意见</label>
                             <div class="layui-input-block">
-                                <textarea placeholder="请输入主办处意见" class="layui-textarea"></textarea>
+                                <textarea name="organizer_advice" placeholder="请输入主办处意见" class="layui-textarea"></textarea>
                             </div>
                         </div>
 
@@ -207,7 +207,7 @@
                         </div>
 
                         <div class="layui-form-item" style="text-align: center;">
-                            <button class="layui-btn" lay-submit="" lay-filter="demo1" >提交</button>
+                            <button class="layui-btn" lay-submit lay-filter="child-form-submit" >提交</button>
                         </div>
 
                     </form>
@@ -219,40 +219,52 @@
 
 </div>
 
-
-
-    <div class="layui-form-item">
-        <button class="layui-btn" lay-submit="" lay-filter="demo1">跳转式提交</button>
-    </div>
-</form>
-<script src="/layui/layui.js"></script>
-<script>
-    layui.use(['form', 'layedit', 'laydate'], function(){
-        var form = layui.form
-            ,layer = layui.layer
-            ,laydate = layui.laydate;
-
-        //监听提交
-        form.on('submit(demo1)', function(data){
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-            return false;
-        });
-
-        //日期
-        laydate.render({
-            elem: '#start_date'
-        });
-        laydate.render({
-            elem: '#end_date'
-        });
-        laydate.render({
-            elem: '#sign_date'
-        });
-
-
-    });
-</script>
 </body>
+
+
+<script src="/layui/layui.js"></script>
+<script src="/scripts/es6-promise.min.js"></script>
+<script type="text/javascript">
+layui.use(['form', 'laydate'], function(){
+    var form = layui.form;
+    var layer = layui.layer;
+    var laydate = layui.laydate;
+    var $ = layui.$;
+
+    //监听提交
+    form.on('submit(child-form-submit)', function(data){
+
+        $.ajax({
+            type: "post",
+            url: "/contract/createSubContract",
+            dataType: "json",
+            contentType: "application/json",
+            async: false,
+            data: JSON.stringify(data.field)
+        }).then(function (res) {
+            if (res.code !== 200) {
+                layer.Notify.error(res.error_msg || '新增子合同失败!');
+                return false;
+            }
+
+            layer.Notify.success('新增子合同成功!');
+        });
+
+        return false;
+    });
+
+    //日期
+    laydate.render({
+        elem: '#start_date'
+    });
+    laydate.render({
+        elem: '#end_date'
+    });
+    laydate.render({
+        elem: '#sign_date'
+    });
+
+
+});
+</script>
 </html>

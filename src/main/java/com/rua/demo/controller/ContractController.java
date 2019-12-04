@@ -5,6 +5,7 @@ import com.rua.demo.common.exception.BaseException;
 import com.rua.demo.common.util.FastJsonUtils;
 import com.rua.demo.common.util.ResultBuilderUtils;
 import com.rua.demo.entity.contract.ContractDTO;
+import com.rua.demo.entity.contract.SubContractDTO;
 import com.rua.demo.service.contract.ContractService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,21 @@ public class ContractController {
         int result = contractService.createContract(contractDTO);
         if (result != 1) {
             throw new BaseException(BaseCode.UNKNOWN, "创建合同出错");
+        }
+
+        return ResultBuilderUtils.buildSuccess(result);
+    }
+
+
+    @RequestMapping(value = "/createSubContract", method = POST)
+    @ResponseBody
+    public String createSubContract(@RequestBody String payload) {
+        logger.info("ContractController #createSubContract payload: {}", payload);
+        SubContractDTO subContractDTO = FastJsonUtils.toBean(payload, SubContractDTO.class);
+        subContractDTO.setParentContractUid("123132132213");
+        int result = contractService.createSubContract(subContractDTO);
+        if (result != 1) {
+            throw new BaseException(BaseCode.UNKNOWN, "创建子合同出错");
         }
 
         return ResultBuilderUtils.buildSuccess(result);

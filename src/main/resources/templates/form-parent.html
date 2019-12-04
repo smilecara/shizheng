@@ -50,7 +50,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">项目名称</label>
                             <div class="layui-input-block">
-                                <select name="project_name">
+                                <select name="project_name" lay-filter="select_project_drop_down">
                                     <option value=""></option>
                                     <option value="road_one" selected="">市一路</option>
                                     <option value="road_two" >市二路</option>
@@ -119,22 +119,28 @@
 <script src="/layui/layui.js"></script>
 <script src="/scripts/es6-promise.min.js"></script>
 <script type="text/javascript">
-    layui.config({
-        lmfView: '/scripts/lib/lmfView'
-    });
+    /*layui.config({
+        base: '/scripts/modules/',
+        version: '20191122123720'
+    }).extend({
+        formSelects: 'formSelects-v4',
+        setter: '../config', //配置文件
+        admin: '../lib/admin', //核心模块
+        view: '../lib/view', //核心模块
+        lmfView: '../lib/lmfView', //全局视图类
+        DateUtils: '../lib/DateUtils', //时间工具类
+        lmfUtils: '../lib/lmfUtils' //工具类
+    });*/
 
     layui.use(['form', 'laydate'], function(){
         var form = layui.form;
         var layer = layui.layer;
         var laydate = layui.laydate;
+        var clickEvent = layui.lmfEvent;
         var $ = layui.$;
 
         //监听提交
         form.on('submit(parent-form-submit)', function(data){
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            });
-
             $.ajax({
                 type: "post",
                 url: "/contract/createContract",
@@ -143,7 +149,7 @@
                 async: false,
                 data: JSON.stringify(data.field)
             }).then(function (res) {
-                if (res.code != 200) {
+                if (res.code !== 200) {
                     layer.Notify.error(res.error_msg || '新增合同失败!');
                     return false;
                 }

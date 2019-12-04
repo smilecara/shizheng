@@ -3,7 +3,9 @@ package com.rua.demo.service.contract.impl;
 import com.github.pagehelper.PageInfo;
 import com.rua.demo.entity.contract.ContractDTO;
 import com.rua.demo.entity.contract.ContractRequestDTO;
+import com.rua.demo.entity.contract.SubContractDTO;
 import com.rua.demo.mapper.contract.ContractMapper;
+import com.rua.demo.mapper.contract.SubContractMapper;
 import com.rua.demo.service.contract.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,6 +15,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Autowired
     private ContractMapper contractMapper;
+
+    @Autowired
+    private SubContractMapper subContractMapper;
 
     @Override
     public PageInfo<ContractDTO> listContracts(ContractRequestDTO contractRequestDTO) {
@@ -32,5 +37,10 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public ContractDTO getContractByContractUid(String contractUid) {
         return null;
+    }
+
+    @Override
+    public int createSubContract(SubContractDTO subContractDTO) {
+        return subContractMapper.createSubContract(subContractDTO);
     }
 }
