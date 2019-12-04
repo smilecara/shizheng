@@ -53,9 +53,9 @@
                                 <label class="layui-form-label">项目名称</label>
                                 <div class="layui-input-block">
                                     <select name="project_name" lay-filter="aihao">
-                                        <option value=""></option>
-                                        <option value="0" selected="">市一路</option>
-                                        <option value="1" >市二路</option>
+                                        <option value="" selected=""></option>
+                                        <option value="0">市一路</option>
+                                        <option value="1">市二路</option>
                                         <option value="2">市三路</option>
                                     </select>
                                 </div>
@@ -108,25 +108,27 @@
 
         //执行一个 table 实例
         table.render({
-            elem: '#demo'
-            // ,height: 620
-            ,url: '/contract/parentData' //数据接口
-            ,title: '用户表'
+            elem: '#demo',
+            url: '/contract/listContract',//数据接口
+            title: '用户表',
             //,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
             //,totalRow: true //开启合计行
-            ,cols: [
-                [
-                {field: 'project_name', title: '项目名称', width: '20%'}
-                ,{field: 'start_date', title: '开始日期', width: '15%'}
-                ,{field: 'end_date', title: '结束日期', width: '15%'}
-                ,{field: 'balance', title: '差额', width: '10%'}
-                ,{field: 'total_budget', title: '总预算', width: '10%' }
-                ,{field: 'tech_budget', title: '技术预算', width: '10%'}
-                ,{field: 'settle_budget', title: '安置预算', width: '10%'}
-                ,{field: 'extra_budget', title: '其他预算', width: '10%'}
-                ,{fixed: 'right', width: '15%', align:'center', toolbar: '#barDemo'}
-            ]
-            ]
+            page: true,
+            where: {
+                sort_order: 'desc',
+                sort_key: 'start_date'
+            },
+            cols: [[
+                    {field: 'project_name', title: '项目名称', width: '20%'},
+                    {field: 'start_date', title: '开始日期', width: '15%'},
+                    {field: 'end_date', title: '结束日期', width: '15%'},
+                    {field: 'balance', title: '差额', width: '10%'},
+                    {field: 'total_budget', title: '总预算', width: '10%' },
+                    {field: 'tech_budget', title: '技术预算', width: '10%'},
+                    {field: 'settle_budget', title: '安置预算', width: '10%'},
+                    {field: 'extra_budget', title: '其他预算', width: '10%'},
+                    {fixed: 'right', width: '15%', align:'center', toolbar: '#barDemo'}
+                ]]
         });
     });
 </script>
