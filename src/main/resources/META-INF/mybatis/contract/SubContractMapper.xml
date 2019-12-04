@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rua.demo.mapper.contract.SubContractMapper">
+    <resultMap type="com.rua.demo.entity.contract.SubContractDTO" id="subContractMap">
+        <result column="contract_id" property="contractUid"/>
+        <result column="parent_contract_uid" property="parentContractUid"/>
+        <result column="contract_code" property="contractCode"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_type" property="projectType"/>
+        <result column="part_a" property="partA"/>
+        <result column="part_b" property="partB"/>
+        <result column="start_date" property="startDate"/>
+        <result column="end_date" property="endDate"/>
+        <result column="cost" property="cost"/>
+        <result column="organizer_advice" property="organizerAdvice"/>
+        <result column="created_person" property="createdPerson"/>
+        <result column="checked_person" property="checkedPerson"/>
+        <result column="sign_date" property="signDate"/>
+        <result column="leader_sign" property="leaderSign"/>
+        <result column="leader_countersign" property="leaderCountersign"/>
+        <result column="synthesize_advice" property="synthesizeAdvice"/>
+        <result column="countersign_advice" property="countersignAdvice"/>
+        <result column="archive" property="archive"/>
+    </resultMap>
+
+    <insert id="createSubContract" parameterType="com.rua.demo.entity.contract.SubContractDTO">
+        <selectKey keyProperty="contractUid" order="BEFORE" resultType="string">
+            SELECT tnt_uuid_short() AS contractUid
+        </selectKey>
+        INSERT INTO ace_biz_sub_contract
+        (contract_uid, parent_contract_uid, contract_code, project_name, project_type,
+        part_a, part_b, start_date, end_date, cost, organizer_advice, created_person,
+        checked_person, sign_date, leader_sign, leader_countersign, synthesize_advice,
+        countersign_advice, archive)
+        VALUES
+        (#{contractUid}, #{parentContractUid}, #{contractCode}, #{projectName}, #{projectType},
+        #{partA}, #{partB}, #{startDate}, #{endDate}, #{cost}, #{organizerAdvice}, #{createdPerson},
+        #{checkedPerson}, #{signDate}, #{leaderSign}, #{leaderCountersign}, #{synthesizeAdvice},
+        #{countersignAdvice}, 1)
+    </insert>
+
+
+</mapper>
